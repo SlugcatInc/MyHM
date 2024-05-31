@@ -1,6 +1,10 @@
+package HumanFamilyTree;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class FamilyTreeFileManager implements FamilyTreeFileOperations {
 
@@ -24,7 +28,7 @@ public class FamilyTreeFileManager implements FamilyTreeFileOperations {
         }
     }
 
-    public List<Person> readFromFile(String filePath) {
+    public static List<Person> readFromFile(String filePath) {
         List<Person> members = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -62,6 +66,10 @@ public class FamilyTreeFileManager implements FamilyTreeFileOperations {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return members;
+    }
+    public static List<Person> sortMembersByAge(List<Person> members) {
+        Collections.sort(members, Comparator.comparingInt(Person::getAge));
         return members;
     }
 }
